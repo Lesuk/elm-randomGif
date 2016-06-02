@@ -8082,9 +8082,9 @@ var _user$project$Main$decodeGifUrl = A2(
 var _user$project$Main$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
 };
-var _user$project$Main$Model = F3(
-	function (a, b, c) {
-		return {topic: a, gifUrl: b, isFetching: c};
+var _user$project$Main$Model = F4(
+	function (a, b, c, d) {
+		return {topic: a, gifUrl: b, defaultGif: c, isFetching: d};
 	});
 var _user$project$Main$FetchFail = function (a) {
 	return {ctor: 'FetchFail', _0: a};
@@ -8101,10 +8101,10 @@ var _user$project$Main$getRandomGif = function (topic) {
 		A2(_evancz$elm_http$Http$get, _user$project$Main$decodeGifUrl, url));
 };
 var _user$project$Main$init = function (topic) {
-	var defaultGif = 'https://d13yacurqjgara.cloudfront.net/users/345826/screenshots/1836550/dots24.gif';
+	var defaultGif = 'http://www.chefdtv.com/wp-content/themes/culinier-theme/images/loader.gif';
 	return {
 		ctor: '_Tuple2',
-		_0: A3(_user$project$Main$Model, topic, defaultGif, false),
+		_0: A4(_user$project$Main$Model, topic, defaultGif, defaultGif, false),
 		_1: _user$project$Main$getRandomGif(topic)
 	};
 };
@@ -8146,52 +8146,132 @@ var _user$project$Main$HandleInputChange = function (a) {
 	return {ctor: 'HandleInputChange', _0: a};
 };
 var _user$project$Main$view = function (model) {
-	var defaultGif = 'https://d13yacurqjgara.cloudfront.net/users/345826/screenshots/1836550/dots24.gif';
-	var img_src = model.isFetching ? defaultGif : model.gifUrl;
+	var img_src = model.isFetching ? model.defaultGif : model.gifUrl;
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
-			[]),
+			[
+				_elm_lang$html$Html_Attributes$class('container')
+			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
 				A2(
-				_elm_lang$html$Html$input,
+				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Events$onInput(_user$project$Main$HandleInputChange)
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[])),
-				A2(
-				_elm_lang$html$Html$button,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Events$onClick(_user$project$Main$MorePlease)
+						_elm_lang$html$Html_Attributes$class('row')
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html$text('More, please!')
+						A2(
+						_elm_lang$html$Html$div,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('ten columns')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$label,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$for('tagInput')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('Search random Gif by name')
+									])),
+								A2(
+								_elm_lang$html$Html$input,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Events$onInput(_user$project$Main$HandleInputChange),
+										_elm_lang$html$Html_Attributes$value(model.topic),
+										_elm_lang$html$Html_Attributes$class('u-full-width'),
+										_elm_lang$html$Html_Attributes$id('tagInput'),
+										_elm_lang$html$Html_Attributes$type$('search')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[]))
+							])),
+						A2(
+						_elm_lang$html$Html$div,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('two columns')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$button,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Events$onClick(_user$project$Main$MorePlease),
+										_elm_lang$html$Html_Attributes$style(
+										_elm_lang$core$Native_List.fromArray(
+											[
+												{ctor: '_Tuple2', _0: 'margin-top', _1: '29px'}
+											])),
+										_elm_lang$html$Html_Attributes$class('u-pull-right')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('One More!')
+									]))
+							]))
 					])),
 				A2(
-				_elm_lang$html$Html$br,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[])),
-				A2(
-				_elm_lang$html$Html$img,
+				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Attributes$src(img_src)
+						_elm_lang$html$Html_Attributes$class('row')
 					]),
 				_elm_lang$core$Native_List.fromArray(
-					[]))
+					[
+						A2(
+						_elm_lang$html$Html$div,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('column')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$div,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$style(
+										_elm_lang$core$Native_List.fromArray(
+											[
+												{ctor: '_Tuple2', _0: 'max-width', _1: '700px'},
+												{ctor: '_Tuple2', _0: 'margin', _1: '0 auto'}
+											]))
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										A2(
+										_elm_lang$html$Html$img,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$src(img_src),
+												_elm_lang$html$Html_Attributes$style(
+												_elm_lang$core$Native_List.fromArray(
+													[
+														{ctor: '_Tuple2', _0: 'display', _1: 'block'},
+														{ctor: '_Tuple2', _0: 'margin', _1: 'auto'}
+													]))
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[]))
+									]))
+							]))
+					]))
 			]));
 };
 var _user$project$Main$main = {
 	main: _elm_lang$html$Html_App$program(
 		{
-			init: _user$project$Main$init('cat'),
+			init: _user$project$Main$init('oops'),
 			update: _user$project$Main$update,
 			view: _user$project$Main$view,
 			subscriptions: _user$project$Main$subscriptions
